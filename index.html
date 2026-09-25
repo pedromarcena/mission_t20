@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ferramentas T20 - ND, Recompensas e Mestragem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-100 min-h-screen py-10 px-4 font-sans text-stone-800 transition-colors duration-200">
+    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-200">
+        
+        <div class="flex border-b border-stone-200 bg-stone-50">
+            <button id="tab-btn-nd" class="flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none">
+                ND
+            </button>
+            <button id="tab-btn-xp" class="flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none">
+                Recompensas
+            </button>
+            <button id="tab-btn-mestre" class="flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none">
+                Mestragem
+            </button>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ABA 1: CALCULADORA DE ND -->
+        <!-- ============================================================ -->
+        <div id="tab-content-nd" class="hidden">
+            <div class="bg-gradient-to-r from-red-950 via-red-900 to-rose-950 text-white p-6 text-center border-b border-red-800">
+                <h1 class="text-3xl font-extrabold tracking-tight text-red-50 drop-shadow">Calculadora de ND</h1>
+                <p class="text-red-200/80 text-sm mt-1">Para regras detalhadas, consulte o suplemento Ameaças de Arton (p. 9)</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div id="inimigos-container" class="space-y-3"></div>
+                
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button id="btn-adicionar" class="flex-1 min-w-[180px] bg-stone-700 hover:bg-stone-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-stone-600">
+                        + Adicionar Inimigo
+                    </button>
+                    <button id="btn-calcular" class="flex-1 min-w-[180px] bg-red-700 hover:bg-red-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-red-800">
+                        Calcular ND Final
+                    </button>
+                </div>
+                
+                <div id="resultado-container" class="mt-6">
+                    <div class="text-center text-stone-400 py-8 border-2 border-dashed border-stone-200 rounded-xl text-sm">
+                        Preencha as quantidades e clique em "Calcular ND Final".
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ABA 2: CALCULADORA DE RECOMPENSAS -->
+        <!-- ============================================================ -->
+        <div id="tab-content-xp" class="hidden">
+            <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-emerald-950 text-white p-6 text-center border-b border-emerald-900">
+                <h1 class="text-3xl font-extrabold tracking-tight text-emerald-50 drop-shadow">Calculadora de Recompensas</h1>
+                <p class="text-emerald-200/80 text-sm mt-1">XP e Tesouro (Missão + Ameaças + Evento)</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div class="space-y-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">ND da Missão</label>
+                            <select id="xp-nd-missao" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                                <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Dificuldade</label>
+                            <select id="xp-dificuldade" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                                <option value="0.4" selected>Normal (40%)</option>
+                                <option value="0.5">Difícil +1 (50%)</option>
+                                <option value="0.6">Valkaria +2 (60%)</option>
+                                <option value="0.7">Tormenta +3 (70%)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Jogadores</label>
+                            <input type="number" id="xp-jogadores" value="4" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-2 border-t border-stone-100 mt-2">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-stone-400 hover:text-red-700 transition-colors">
+                            <input type="checkbox" id="xp-falha-missao" class="w-4 h-4 accent-red-600 rounded">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Falha na Missão (Penalidade em XP)</span>
+                        </label>
+                        <div class="flex flex-wrap gap-x-6 gap-y-2">
+                            <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-600 hover:text-emerald-800 transition-colors">
+                                <input type="checkbox" id="xp-bonus-evento" class="w-4 h-4 accent-emerald-600 rounded">
+                                <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento XP (+</span>
+                                <input type="number" id="xp-bonus-evento-valor" value="25" min="0" max="999" step="5"
+                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
+                            </label>
+                            <label class="inline-flex items-center gap-2 cursor-pointer text-rose-700 hover:text-rose-900 transition-colors">
+                                <input type="checkbox" id="tesouro-bonus-evento" class="w-4 h-4 accent-rose-700 rounded">
+                                <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento T$ (+</span>
+                                <input type="number" id="tesouro-bonus-evento-valor" value="25" min="0" max="999" step="5"
+                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                                <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-sm font-bold text-stone-700 uppercase tracking-widest">Criaturas em Combate</h3>
+                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-emerald-200">Sincronizado via ND</span>
+                    </div>
+                    <div id="xp-ameacas-container" class="space-y-3"></div>
+                    <button id="btn-add-ameaca" class="w-full mt-3 bg-stone-700 hover:bg-stone-800 text-white font-semibold py-2 px-4 rounded-xl transition-all shadow-sm cursor-pointer active:scale-95">
+                        + Adicionar Criatura
+                    </button>
+                </div>
+
+                <button id="btn-calcular-xp" class="w-full bg-stone-800 hover:bg-black text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
+                    Calcular Recompensas
+                </button>
+                
+                <div id="xp-resultado-container"></div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ABA 3: CALCULADORA DE MESTRAGEM -->
+        <!-- ============================================================ -->
+        <div id="tab-content-mestre" class="hidden">
+            <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-950 text-white p-6 text-center border-b border-indigo-900">
+                <h1 class="text-3xl font-extrabold tracking-tight text-indigo-50 drop-shadow">Calculadora de Mestragem</h1>
+                <p class="text-indigo-200/80 text-sm mt-1">Recompensas individuais por ND do personagem</p>
+            </div>
+            
+            <div class="p-6 space-y-6">
+                <div class="space-y-2">
+                    <div>
+                        <label class="block text-xs font-bold text-stone-500 uppercase mb-1">ND do Personagem</label>
+                        <select id="mestre-nd" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-indigo-500 bg-white">
+                            <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 pt-2 border-t border-stone-100 mt-2">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-600 hover:text-emerald-800 transition-colors">
+                            <input type="checkbox" id="mestre-bonus-xp" class="w-4 h-4 accent-emerald-600 rounded">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento XP (+</span>
+                            <input type="number" id="mestre-bonus-xp-valor" value="25" min="0" max="999" step="5"
+                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
+                        </label>
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-rose-700 hover:text-rose-900 transition-colors">
+                            <input type="checkbox" id="mestre-bonus-tesouro" class="w-4 h-4 accent-rose-700 rounded">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento T$ (+</span>
+                            <input type="number" id="mestre-bonus-tesouro-valor" value="25" min="0" max="999" step="5"
+                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
+                        </label>
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-indigo-600 hover:text-indigo-800 transition-colors">
+                            <input type="checkbox" id="mestre-missao-interpretativa" class="w-4 h-4 accent-indigo-600 rounded">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Missão Interpretativa (XP ×333,33 / T$ ÷3)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button id="btn-calcular-mestre" class="w-full bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
+                    Calcular Recompensas do Mestre
+                </button>
+                
+                <div id="mestre-resultado-container">
+                    <div class="text-center text-stone-400 py-8 border-2 border-dashed border-stone-200 rounded-xl text-sm">
+                        Escolha o ND e clique em "Calcular Recompensas do Mestre".
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-stone-50 p-4 border-t border-stone-100 text-center text-xs text-stone-400">
+            Ferramentas para o sistema de RPG Tormenta 20 - Jogo do Ano.
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // SISTEMA DE ABAS
+        // ==========================================
+        function switchTab(tab) {
+            const tabNd = document.getElementById('tab-content-nd');
+            const tabXp = document.getElementById('tab-content-xp');
+            const tabMestre = document.getElementById('tab-content-mestre');
+            const btnNd = document.getElementById('tab-btn-nd');
+            const btnXp = document.getElementById('tab-btn-xp');
+            const btnMestre = document.getElementById('tab-btn-mestre');
+
+            // Esconde todas
+            tabNd.classList.add('hidden');
+            tabXp.classList.add('hidden');
+            tabMestre.classList.add('hidden');
+
+            // Classes padrão (inativo)
+            const clsInativo = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-transparent text-stone-500 hover:bg-stone-100 hover:text-stone-700";
+
+            // Reset dos botões
+            btnNd.className = clsInativo;
+            btnXp.className = clsInativo;
+            btnMestre.className = clsInativo;
+
+            if (tab === 'nd') {
+                tabNd.classList.remove('hidden');
+                btnNd.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-red-600 text-red-700 bg-red-50";
+            } else if (tab === 'xp') {
+                tabXp.classList.remove('hidden');
+                btnXp.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-emerald-600 text-emerald-700 bg-emerald-50";
+                sincronizarNDparaXP();
+            } else {
+                tabMestre.classList.remove('hidden');
+                btnMestre.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-indigo-600 text-indigo-700 bg-indigo-50";
+            }
+        }
+
+        document.getElementById('tab-btn-nd').addEventListener('click', () => switchTab('nd'));
+        document.getElementById('tab-btn-xp').addEventListener('click', () => switchTab('xp'));
+        document.getElementById('tab-btn-mestre').addEventListener('click', () => switchTab('mestre'));
+
+
+        // ==========================================
+        // LÓGICA: CALCULADORA DE ND
+        // ==========================================
+        let grandpaIdND = 0;
+        
+        function floorQuarter(valor) { return Math.floor((valor + 1e-12) * 4) / 4; }
+        
+        function formatNd(valor) {
+            valor = floorQuarter(valor);
+            if (Math.abs(valor - 0.25) < 1e-9) return "1/4";
+            if (Math.abs(valor - 0.5) < 1e-9) return "1/2";
+            if (Math.abs(valor - 0.75) < 1e-9) return "3/4";
+            if (Math.abs(valor - Math.round(valor)) < 1e-9) return Math.round(valor).toString();
+            return valor.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+        }
+        
+        function decomporEmPotenciasDeDois(qtd) {
+            const grupos = [];
+            let restante = qtd;
+            let potencia = 1;
+            while (potencia * 2 <= restante) { potencia *= 2; }
+            while (restante > 0 && potencia > 0) {
+                if (potencia <= restante) {
+                    grupos.push(potencia);
+                    restante -= potencia;
+                } else {
+                    potencia = Math.floor(potencia / 2);
+                }
+            }
+            return grupos;
+        }
+        
+        function adicionarLinhaND() {
+            grandpaIdND++;
+            const container = document.getElementById("inimigos-container");
+            const div = document.createElement("div");
+            div.id = `linha-nd-${grandpaIdND}`;
+            div.className = "flex gap-3 items-end bg-stone-50 p-4 rounded-xl border border-stone-200 relative transition-colors";
+            
+            div.innerHTML = `
+                <div class="w-1/3">
+                    <label class="block text-xs font-bold text-stone-500 uppercase mb-1 tracking-wide">Quantidade</label>
+                    <input type="number" id="qtd-${grandpaIdND}" value="1" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-300 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-red-600 font-medium">
+                </div>
+                <div class="w-2/3 pr-10">
+                    <label class="block text-xs font-bold text-stone-500 uppercase mb-1 tracking-wide">ND</label>
+                    <select id="nd-${grandpaIdND}" class="w-full px-3 py-2 border rounded-lg border-stone-300 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-red-600 font-medium">
+                        <option value="0.25">1/4</option><option value="0.5">1/2</option><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+                    </select>
+                </div>
+                <button type="button" onclick="document.getElementById('linha-nd-${grandpaIdND}').remove()" class="absolute right-3 bottom-3 text-stone-400 hover:text-red-600 transition-colors p-1 font-bold text-lg cursor-pointer" title="Remover">
+                    &times;
+                </button>
+            `;
+            container.appendChild(div);
+        }
+        
+        function calcularND() {
+            const container = document.getElementById("inimigos-container");
+            const inputsQtd = container.querySelectorAll("input[id^='qtd-']");
+            const selectsNd = container.querySelectorAll("select[id^='nd-']");
+            
+            const pool = {};
+            for (let i = 0; i < inputsQtd.length; i++) {
+                try {
+                    const qtdVal = inputsQtd[i].value;
+                    const ndVal = selectsNd[i].value;
+                    if (qtdVal && ndVal) {
+                        const qtd = parseInt(qtdVal, 10);
+                        const nd = parseFloat(ndVal);
+                        if (qtd > 0) {
+                            pool[nd] = (pool[nd] || 0) + qtd;
+                        }
+                    }
+                } catch (e) { continue; }
+            }
+            if (Object.keys(pool).length === 0) {
+                document.getElementById("resultado-container").innerHTML = `
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-center font-medium text-sm">
+                        Adicione ao menos uma ameaça com quantidade válida para computar.
+                    </div>
+                `;
+                return;
+            }
+
+            let logFracoes = "";
+            let fracSum = 0;
+            let fracoesOriginais = [];
+            
+            [0.25, 0.5, 0.75].forEach(frac => {
+                if (pool[frac]) {
+                    fracSum += pool[frac] * frac;
+                    fracoesOriginais.push(`${pool[frac]}x ND ${formatNd(frac)}`);
+                    delete pool[frac];
+                }
+            });
+
+            if (fracSum > 0) {
+                let nd1ToAdd = Math.floor(fracSum + 1e-9);
+                let remainder = Math.round((fracSum - nd1ToAdd) * 4) / 4;
+                
+                if (nd1ToAdd > 0) pool[1] = (pool[1] || 0) + nd1ToAdd;
+                if (remainder > 0) pool[remainder] = (pool[remainder] || 0) + 1;
+                
+                logFracoes = `<div class="mt-3 pt-3 border-t border-stone-200 text-stone-700 text-xs space-y-1">`;
+                logFracoes += `<div><strong>Regra de Frações (Ameaças de Arton, p.9):</strong><br>Somando frações (${fracoesOriginais.join(" + ")}) = ${fracSum.toFixed(2)} ND Base.</div>`;
+                if (nd1ToAdd > 0) logFracoes += `<div class="text-red-700">&rarr; Convertido para <strong>${nd1ToAdd}x ND 1</strong></div>`;
+                if (remainder > 0) logFracoes += `<div class="text-stone-500">&rarr; Restou <strong>1x ND ${formatNd(remainder)}</strong></div>`;
+                logFracoes += `</div>`;
+            }
+                
+            const chaves = Object.keys(pool).map(parseFloat).sort((a, b) => b - a);
+            
+            let htmlPasso0 = `
+                <div class="space-y-2">
+                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">0</span>
+                        Entrada ajustada para o cálculo:
+                    </h4>
+                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+            `;
+            chaves.forEach(nd => { htmlPasso0 += `<div>&bull; ${pool[nd]}x ND ${formatNd(nd)}</div>`; });
+            htmlPasso0 += logFracoes + "</div></div>";
+            
+            let htmlPasso1 = `
+                <div class="space-y-2 pt-2 border-t border-stone-100">
+                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">1</span>
+                        Agrupamento inicial em potências de 2 (por criatura):
+                    </h4>
+                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+            `;
+            
+            let gruposConsolidados = [];
+            chaves.forEach(ndAtual => {
+                const qtd = pool[ndAtual];
+                const grupos = decomporEmPotenciasDeDois(qtd);
+                htmlPasso1 += `<div class='text-red-600 font-bold'>&bull; ND ${formatNd(ndAtual)} com quantidade ${qtd}:</div>`;
+                grupos.forEach(grupo => {
+                    if (grupo > 1) {
+                        const potenciaLog2 = Math.floor(Math.log2(grupo));
+                        const bonusDobra = 2 * potenciaLog2;
+                        const novoNd = floorQuarter(ndAtual + bonusDobra);
+                        gruposConsolidados.push(novoNd);
+                        htmlPasso1 += `<div class='pl-4'>&rarr; grupo de ${grupo} (2<sup>${potenciaLog2}</sup>) = ND ${formatNd(ndAtual)} + ${bonusDobra} &rarr; <strong>ND ${formatNd(novoNd)}</strong></div>`;
+                    } else {
+                        const novoNd = floorQuarter(ndAtual);
+                        gruposConsolidados.push(novoNd);
+                        htmlPasso1 += `<div class='pl-4'>&rarr; sobra de 1 = <strong>ND ${formatNd(novoNd)}</strong></div>`;
+                    }
+                });
+            });
+            
+            gruposConsolidados.sort((a, b) => b - a);
+            const gruposIniciaisFormatados = gruposConsolidados.map(n => formatNd(n)).join(', ');
+            htmlPasso1 += `<div class='pt-2 mt-2 border-t border-stone-200 text-stone-800'><strong>Grupos resultantes desta etapa:</strong> [${gruposIniciaisFormatados}]</div>`;
+            htmlPasso1 += "</div></div>";
+            
+            let htmlPasso1B = "";
+            let houveReagrupamento = false;
+            let rodadaConsolidacao = 0;
+
+            while (true) {
+                let contagem = {};
+                gruposConsolidados.forEach(nd => { contagem[nd] = (contagem[nd] || 0) + 1; });
+                
+                let temRepetido = Object.values(contagem).some(q => q > 1);
+                if (!temRepetido) break;
+                
+                houveReagrupamento = true;
+                rodadaConsolidacao++;
+                
+                if (rodadaConsolidacao === 1) {
+                    htmlPasso1B += `
+                        <div class="space-y-2 pt-2 border-t border-stone-100">
+                            <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">1B</span>
+                                Re-agrupamento de NDs Resultantes Idênticos:
+                            </h4>
+                            <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+                    `;
+                }
+                
+                let proximosGrupos = [];
+                let chavesContagem = Object.keys(contagem).map(parseFloat).sort((a, b) => b - a);
+                
+                chavesContagem.forEach(nd => {
+                    let qtd = contagem[nd];
+                    if (qtd > 1) {
+                        let subGrupos = decomporEmPotenciasDeDois(qtd);
+                        htmlPasso1B += `<div>&bull; Encontrados <strong>${qtd}x ND ${formatNd(nd)}</strong> repetidos entre as ameaças:</div>`;
+                        subGrupos.forEach(grupo => {
+                            if (grupo > 1) {
+                                let potenciaLog2 = Math.floor(Math.log2(grupo));
+                                let bonusDobra = 2 * potenciaLog2;
+                                let novoNd = floorQuarter(nd + bonusDobra);
+                                proximosGrupos.push(novoNd);
+                                htmlPasso1B += `<div class='pl-4 text-rose-700 font-semibold'>&rarr; Novo grupo de ${grupo} = ND ${formatNd(nd)} + ${bonusDobra} &rarr; <strong>ND ${formatNd(novoNd)}</strong></div>`;
+                            } else {
+                                let novoNd = floorQuarter(nd);
+                                proximosGrupos.push(novoNd);
+                                htmlPasso1B += `<div class='pl-4'>&rarr; Sobra isolada = <strong>ND ${formatNd(novoNd)}</strong></div>`;
+                            }
+                        });
+                    } else {
+                        proximosGrupos.push(nd);
+                    }
+                });
+                
+                gruposConsolidados = proximosGrupos.sort((a, b) => b - a);
+            }
+            
+            if (houveReagrupamento) {
+                const gruposFinaisPosReagrupamento = gruposConsolidados.map(n => formatNd(n)).join(', ');
+                htmlPasso1B += `<div class='pt-2 mt-2 border-t border-stone-200 text-stone-800'><strong>Grupos consolidados finais pós-fusão:</strong> [${gruposFinaisPosReagrupamento}]</div>`;
+                htmlPasso1B += "</div></div>";
+            }
+
+            const ndMax = gruposConsolidados[0];
+            let totalNd = ndMax;
+            
+            let htmlPasso2 = `
+                <div class="space-y-2 pt-2 border-t border-stone-100">
+                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">2</span>
+                        Mistura entre grupos diferentes:
+                    </h4>
+                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-2 pl-8">
+                        <div>Ameaça Principal (Base): <strong class='text-red-700'>${formatNd(totalNd)}</strong></div>
+                        <div class="space-y-1 pt-1 border-t border-stone-200 text-xs">
+            `;
+            
+            for (let i = 1; i < gruposConsolidados.length; i++) {
+                const ndOutro = gruposConsolidados[i];
+                const diff = floorQuarter(ndMax - ndOutro);
+                let bonus = 0;
+                if (diff <= 1) bonus = 1;
+                else if (diff <= 2) bonus = 0.5;
+                else if (diff <= 3) bonus = 0.25;
+                
+                if (bonus > 0) {
+                    totalNd = floorQuarter(totalNd + bonus);
+                    htmlPasso2 += `<div class='text-stone-500'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; bônus +${formatNd(bonus)} &rarr; <strong>Acumulado: ${formatNd(totalNd)}</strong></div>`;
+                } else {
+                    htmlPasso2 += `<div class='text-stone-400'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; Afastado demais (+0)</div>`;
+                }
+            }
+                
+            if (gruposConsolidados.length === 1) {
+                htmlPasso2 += "<div class='text-stone-400 italic'>O encontro possui apenas uma faixa consolidada de ND.</div>";
+            }
+                
+            htmlPasso2 += "</div></div></div>";
+            
+            let ndFinal = floorQuarter(totalNd);
+            if (ndFinal < 0) ndFinal = 0;
+            
+            const htmlResultado = `
+                <div class="bg-gradient-to-b from-red-50/60 to-white p-5 rounded-2xl border border-red-100 shadow-sm space-y-4">
+                    <div class="text-center bg-red-700/10 p-5 rounded-xl border border-red-200/60">
+                        <span class="block text-xs font-bold text-red-700 uppercase tracking-widest mb-1">ND Final do Encontro</span>
+                        <span class="text-5xl font-black text-red-950">${formatNd(ndFinal)}</span>
+                    </div>
+                    ${htmlPasso0}
+                    ${htmlPasso1}
+                    ${htmlPasso1B}
+                    ${htmlPasso2}
+                </div>
+            `;
+            document.getElementById("resultado-container").innerHTML = htmlResultado;
+        }
+
+        document.getElementById("btn-adicionar").onclick = adicionarLinhaND;
+        document.getElementById("btn-calcular").onclick = calcularND;
+        adicionarLinhaND();
+
+
+        // ==========================================
+        // TABELA DE TESOURO BASE POR ND
+        // ==========================================
+        const TABELA_TESOURO = {
+            1: 300, 2: 300, 3: 400, 4: 1000, 5: 1000,
+            6: 2000, 7: 2000, 8: 3000, 9: 3000, 10: 6000,
+            11: 8000, 12: 9000, 13: 13000, 14: 17000, 15: 22000,
+            16: 22000, 17: 40000, 18: 50000, 19: 60000, 20: 72000
+        };
+
+        function getTesouroBaseND(nd) {
+            if (!nd || nd <= 0) return 0;
+            if (nd < 1) return Math.ceil(TABELA_TESOURO[1] * nd);
+            const ndInt = Math.round(nd);
+            return TABELA_TESOURO[ndInt] || 0;
+        }
+
+        // ==========================================
+        // LÓGICA: CALCULADORA DE RECOMPENSAS
+        // ==========================================
+        let grandpaIdXP = 0;
+
+        function formatarNDXP(valor) {
+            if (valor === 0.25) return "1/4";
+            if (valor === 0.5) return "1/2";
+            return valor;
+        }
+
+        function formatarT$(valor) {
+            return "T$ " + Math.ceil(valor).toLocaleString('pt-BR');
+        }
+
+        function adicionarAmeacaXP(qtdPadrao = 1, ndPadrao = 1, tesouroPadrao = 1) {
+            grandpaIdXP++;
+            const container = document.getElementById("xp-ameacas-container");
+            const div = document.createElement("div");
+            div.id = `ameaca-xp-${grandpaIdXP}`;
+            div.className = "flex gap-2 bg-stone-50 p-3 rounded-xl border border-stone-200 items-center transition-all";
+            
+            const optionsHtml = [0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                .map(n => `<option value="${n}" ${parseFloat(n) === parseFloat(ndPadrao) ? 'selected' : ''}>ND ${formatarNDXP(n)}</option>`)
+                .join('');
+
+            div.innerHTML = `
+                <div class="w-14">
+                    <input type="number" id="xp-q-${grandpaIdXP}" value="${qtdPadrao}" min="1" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-center" placeholder="Qtd" title="Quantidade">
+                </div>
+                <div class="flex-1">
+                    <select id="xp-n-${grandpaIdXP}" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-emerald-500 outline-none" title="ND da Criatura">
+                        ${optionsHtml}
+                    </select>
+                </div>
+                <div class="flex-1">
+                    <select id="xp-t-${grandpaIdXP}" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-rose-500 outline-none" title="Tesouro da Criatura">
+                        <option value="0" ${parseFloat(tesouroPadrao) === 0 ? 'selected' : ''}>T$ Nenhum</option>
+                        <option value="0.5" ${parseFloat(tesouroPadrao) === 0.5 ? 'selected' : ''}>T$ Metade</option>
+                        <option value="1" ${parseFloat(tesouroPadrao) === 1 ? 'selected' : ''}>T$ Padrão</option>
+                        <option value="2" ${parseFloat(tesouroPadrao) === 2 ? 'selected' : ''}>T$ Dobro</option>
+                    </select>
+                </div>
+                <button type="button" onclick="document.getElementById('ameaca-xp-${grandpaIdXP}').remove()" class="text-red-500 font-bold hover:text-red-700 cursor-pointer px-1 text-lg" title="Remover">&times;</button>
+            `;
+            container.appendChild(div);
+        }
+
+        function sincronizarNDparaXP() {
+            const containerND = document.getElementById("inimigos-container");
+            const inputsQtdND = containerND.querySelectorAll("input[id^='qtd-']");
+            const selectsNdND = containerND.querySelectorAll("select[id^='nd-']");
+            
+            const containerXP = document.getElementById("xp-ameacas-container");
+            containerXP.innerHTML = ''; 
+            
+            let transferiuAlgo = false;
+            
+            for (let i = 0; i < inputsQtdND.length; i++) {
+                const qtdVal = inputsQtdND[i].value;
+                const ndVal = selectsNdND[i].value;
+                
+                if (qtdVal && ndVal) {
+                    const qtd = parseInt(qtdVal, 10);
+                    const nd = parseFloat(ndVal);
+                    if (qtd > 0) {
+                        adicionarAmeacaXP(qtd, nd, 1);
+                        transferiuAlgo = true;
+                    }
+                }
+            }
+            
+            if (!transferiuAlgo) {
+                adicionarAmeacaXP(1, 1, 1);
+            }
+        }
+
+        function calcularXP() {
+            const ndMissao = parseFloat(document.getElementById("xp-nd-missao").value);
+            const selectDif = document.getElementById("xp-dificuldade");
+            const multiDif = parseFloat(selectDif.value);
+            
+            const qtdJogadores = parseInt(document.getElementById("xp-jogadores").value) || 1;
+            const bBonus = document.getElementById("xp-bonus-evento").checked;
+            const bFalha = document.getElementById("xp-falha-missao").checked;
+            const bBonusTesouro = document.getElementById("tesouro-bonus-evento").checked;
+            
+            // ==================== XP ====================
+            const xpMissaoBase = bFalha ? Math.ceil(ndMissao * 500) : Math.ceil(ndMissao * 1000);
+
+            let xpBrutoCriaturas = 0;
+            document.querySelectorAll("[id^='xp-q-']").forEach(input => {
+                const id = input.id.split('-').pop();
+                const nd = parseFloat(document.getElementById(`xp-n-${id}`).value) || 0;
+                xpBrutoCriaturas += (nd * 1000) * parseInt(input.value);
+            });
+
+            const xpCriaturasModificado = bFalha ? Math.ceil(xpBrutoCriaturas * 0.20) : Math.ceil(xpBrutoCriaturas * multiDif);
+
+            let xpTotalSessao = xpMissaoBase + xpCriaturasModificado;
+
+            let valorBonus = 0;
+            let percentualBonus = 0;
+            if(bBonus) {
+                const inputBonus = document.getElementById("xp-bonus-evento-valor");
+                percentualBonus = parseFloat(inputBonus.value) || 0;
+                if (percentualBonus < 0) percentualBonus = 0;
+                valorBonus = Math.ceil(xpTotalSessao * (percentualBonus / 100));
+                xpTotalSessao += valorBonus;
+            }
+
+            const xpPorJogador = Math.ceil(xpTotalSessao / qtdJogadores);
+
+            // ==================== TESOURO ====================
+            const tesouroBaseMissao = getTesouroBaseND(ndMissao);
+
+            let tesouroCriaturasTotal = 0;
+            let linhasTesouroCriaturas = [];
+            document.querySelectorAll("[id^='xp-q-']").forEach(input => {
+                const id = input.id.split('-').pop();
+                const ndCriatura = parseFloat(document.getElementById(`xp-n-${id}`).value) || 0;
+                const qtd = parseInt(input.value) || 0;
+                const multTesouro = parseFloat(document.getElementById(`xp-t-${id}`).value);
+                if (multTesouro === undefined || isNaN(multTesouro)) return;
+                const baseUnit = getTesouroBaseND(ndCriatura);
+                const valorLinha = baseUnit * multTesouro * qtd;
+                tesouroCriaturasTotal += valorLinha;
+                
+                if (qtd > 0 && multTesouro > 0) {
+                    const nomesMult = { 0: 'Nenhum', 0.5: 'Metade', 1: 'Padrão', 2: 'Dobro' };
+                    linhasTesouroCriaturas.push(
+                        `<div class='text-stone-500'>&bull; ${qtd}x ND ${formatarNDXP(ndCriatura)} (${nomesMult[multTesouro]}) &rarr; ${formatarT$(valorLinha)}</div>`
+                    );
+                }
+            });
+
+            const tesouroSubtotal = tesouroBaseMissao + tesouroCriaturasTotal;
+
+            let tesouroBonusValor = 0;
+            let percentualBonusTesouro = 0;
+            if (bBonusTesouro) {
+                const inputBonusT = document.getElementById("tesouro-bonus-evento-valor");
+                percentualBonusTesouro = parseFloat(inputBonusT.value) || 0;
+                if (percentualBonusTesouro < 0) percentualBonusTesouro = 0;
+                tesouroBonusValor = Math.ceil(tesouroSubtotal * (percentualBonusTesouro / 100));
+            }
+
+            const tesouroFinal = tesouroSubtotal + tesouroBonusValor;
+
+            // ==================== RESULTADO ====================
+            const corTema = bFalha ? 'red' : 'emerald';
+            const textoMissao = bFalha ? `Base (Falha - 50% ND ${formatarNDXP(ndMissao)}):` : `Base da Missão (ND ${formatarNDXP(ndMissao)}):`;
+            const porcentagemCriaturas = bFalha ? 20 : (multiDif * 100).toFixed(0);
+
+            document.getElementById("xp-resultado-container").innerHTML = `
+                <div class="mt-6 space-y-6">
+                    
+                    <!-- ==================== XP ==================== -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-emerald-700 uppercase tracking-widest border-b border-emerald-200 pb-1">Experiência (XP)</h3>
+                        
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm text-stone-600 space-y-2">
+                            <div class="flex justify-between ${bFalha ? 'text-red-700' : ''}">
+                                <span>${textoMissao}</span>
+                                <strong>${xpMissaoBase.toLocaleString('pt-BR')} XP</strong>
+                            </div>
+                            <div class="flex justify-between ${bFalha ? 'text-red-700' : ''}">
+                                <span>Criaturas (${porcentagemCriaturas}% de ${xpBrutoCriaturas.toLocaleString('pt-BR')}):</span>
+                                <strong>+ ${xpCriaturasModificado.toLocaleString('pt-BR')} XP</strong>
+                            </div>
+                            ${bBonus ? `
+                            <div class="flex justify-between text-emerald-600">
+                                <span>Bônus de Evento XP (+${percentualBonus}%):</span>
+                                <strong>+ ${valorBonus.toLocaleString('pt-BR')} XP</strong>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex-1 bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-center flex flex-col justify-center">
+                                <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">XP Total Sessão</p>
+                                <p class="text-4xl font-black text-stone-800">${xpTotalSessao.toLocaleString('pt-BR')}</p>
+                            </div>
+                            
+                            <div class="flex-1 bg-gradient-to-br from-${corTema}-50 to-white p-6 rounded-2xl border border-${corTema}-300 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-${corTema}-700 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
+                                    Div / ${qtdJogadores}
+                                </div>
+                                <p class="text-xs font-bold text-${corTema}-800 uppercase tracking-widest mb-2">XP por Jogador</p>
+                                <p class="text-5xl font-black text-${corTema}-950">${xpPorJogador.toLocaleString('pt-BR')}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== TESOURO ==================== -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-rose-700 uppercase tracking-widest border-b border-rose-200 pb-1">Tesouro (T$)</h3>
+                        
+                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm text-stone-700 space-y-2">
+                            <div class="flex justify-between">
+                                <span>Tesouro Base da Missão (ND ${formatarNDXP(ndMissao)}):</span>
+                                <strong>${formatarT$(tesouroBaseMissao)}</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Criaturas (${linhasTesouroCriaturas.length} tipo${linhasTesouroCriaturas.length !== 1 ? 's' : ''}):</span>
+                                <strong>+ ${formatarT$(tesouroCriaturasTotal)}</strong>
+                            </div>
+                            ${linhasTesouroCriaturas.length > 0 ? `
+                            <div class="pl-3 pt-1 border-t border-rose-200 text-xs space-y-0.5">
+                                ${linhasTesouroCriaturas.join('')}
+                            </div>` : ''}
+                            ${bBonusTesouro ? `
+                            <div class="flex justify-between text-rose-700 pt-1 border-t border-rose-200">
+                                <span>Bônus de Evento T$ (+${percentualBonusTesouro}%):</span>
+                                <strong>+ ${formatarT$(tesouroBonusValor)}</strong>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <div class="flex-1 bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-center flex flex-col justify-center">
+                                <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">Tesouro Total Sessão</p>
+                                <p class="text-4xl font-black text-stone-800">${formatarT$(tesouroFinal)}</p>
+                            </div>
+                            
+                            <div class="flex-1 bg-gradient-to-br from-rose-50 to-white p-6 rounded-2xl border border-rose-300 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-rose-700 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
+                                    Div / ${qtdJogadores}
+                                </div>
+                                <p class="text-xs font-bold text-rose-800 uppercase tracking-widest mb-2">Tesouro por Jogador</p>
+                                <p class="text-5xl font-black text-rose-950">${formatarT$(tesouroFinal / qtdJogadores)}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById("xp-falha-missao").addEventListener('change', (e) => {
+            const selectDif = document.getElementById("xp-dificuldade");
+            if(e.target.checked) {
+                selectDif.disabled = true;
+                selectDif.classList.add('opacity-50', 'bg-stone-100');
+            } else {
+                selectDif.disabled = false;
+                selectDif.classList.remove('opacity-50', 'bg-stone-100');
+            }
+        });
+
+        document.getElementById("xp-bonus-evento").addEventListener('change', (e) => {
+            const inputValor = document.getElementById("xp-bonus-evento-valor");
+            if(e.target.checked) {
+                inputValor.disabled = false;
+                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+            } else {
+                inputValor.disabled = true;
+                inputValor.classList.add('opacity-50', 'bg-stone-100');
+            }
+        });
+
+        document.getElementById("tesouro-bonus-evento").addEventListener('change', (e) => {
+            const inputValor = document.getElementById("tesouro-bonus-evento-valor");
+            if(e.target.checked) {
+                inputValor.disabled = false;
+                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+            } else {
+                inputValor.disabled = true;
+                inputValor.classList.add('opacity-50', 'bg-stone-100');
+            }
+        });
+
+        document.getElementById("xp-bonus-evento-valor").disabled = true;
+        document.getElementById("xp-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("tesouro-bonus-evento-valor").disabled = true;
+        document.getElementById("tesouro-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-100');
+
+        document.getElementById("btn-add-ameaca").onclick = () => adicionarAmeacaXP();
+        document.getElementById("btn-calcular-xp").onclick = calcularXP;
+
+
+        // ==========================================
+        // LÓGICA: CALCULADORA DE MESTRAGEM
+        // ==========================================
+        function calcularMestre() {
+            const nd = parseInt(document.getElementById("mestre-nd").value);
+            
+            const bBonusXP = document.getElementById("mestre-bonus-xp").checked;
+            const bBonusT = document.getElementById("mestre-bonus-tesouro").checked;
+            const bInterpretativa = document.getElementById("mestre-missao-interpretativa").checked;
+
+        
+            let xpBase, tesouroBase;
+            if (bInterpretativa) {
+                xpBase = nd * 333.33;
+                tesouroBase = getTesouroBaseND(nd) / 3;
+            } else {
+                xpBase = nd * 500;
+                tesouroBase = getTesouroBaseND(nd) * 0.5;
+            }
+            
+            // Bônus XP
+            let xpBonusValor = 0;
+            let percentualXP = 0;
+            if (bBonusXP) {
+                percentualXP = parseFloat(document.getElementById("mestre-bonus-xp-valor").value) || 0;
+                if (percentualXP < 0) percentualXP = 0;
+                xpBonusValor = Math.ceil(xpBase * (percentualXP / 100));
+            }
+            const xpFinal = xpBase + xpBonusValor;
+            
+            // Bônus T$
+            let tesouroBonusValor = 0;
+            let percentualT = 0;
+            if (bBonusT) {
+                percentualT = parseFloat(document.getElementById("mestre-bonus-tesouro-valor").value) || 0;
+                if (percentualT < 0) percentualT = 0;
+                tesouroBonusValor = Math.ceil(tesouroBase * (percentualT / 100));
+            }
+            const tesouroFinal = tesouroBase + tesouroBonusValor;
+            
+            document.getElementById("mestre-resultado-container").innerHTML = `
+                <div class="space-y-6">
+                    
+                    <!-- ==================== XP ==================== -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-emerald-700 uppercase tracking-widest border-b border-emerald-200 pb-1">Experiência (XP)</h3>
+                        
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm text-stone-600 space-y-2">
+                            <div class="flex justify-between">
+                                <span>XP Base (ND ${nd} × 500):</span>
+                                <strong>${xpBase.toLocaleString('pt-BR')} XP</strong>
+                            </div>
+                            ${bBonusXP ? `
+                            <div class="flex justify-between text-emerald-600">
+                                <span>Bônus de Evento XP (+${percentualXP}%):</span>
+                                <strong>+ ${xpBonusValor.toLocaleString('pt-BR')} XP</strong>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-2xl border border-emerald-300 shadow-md text-center">
+                            <p class="text-xs font-bold text-emerald-800 uppercase tracking-widest mb-2">XP Total</p>
+                            <p class="text-5xl font-black text-emerald-950">${xpFinal.toLocaleString('pt-BR')}</p>
+                        </div>
+                    </div>
+
+                    <!-- ==================== TESOURO ==================== -->
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-bold text-rose-700 uppercase tracking-widest border-b border-rose-200 pb-1">Tesouro (T$)</h3>
+                        
+                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm text-stone-700 space-y-2">
+                            <div class="flex justify-between">
+                                <span>Tesouro Base (Metade de ND ${nd}):</span>
+                                <strong>${formatarT$(tesouroBase)}</strong>
+                            </div>
+                            ${bBonusT ? `
+                            <div class="flex justify-between text-rose-700">
+                                <span>Bônus de Evento T$ (+${percentualT}%):</span>
+                                <strong>+ ${formatarT$(tesouroBonusValor)}</strong>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="bg-gradient-to-br from-rose-50 to-white p-6 rounded-2xl border border-rose-300 shadow-md text-center">
+                            <p class="text-xs font-bold text-rose-800 uppercase tracking-widest mb-2">Tesouro Total</p>
+                            <p class="text-5xl font-black text-rose-950">${formatarT$(tesouroFinal)}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        document.getElementById("mestre-bonus-xp").addEventListener('change', (e) => {
+            const inputValor = document.getElementById("mestre-bonus-xp-valor");
+            if(e.target.checked) {
+                inputValor.disabled = false;
+                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+            } else {
+                inputValor.disabled = true;
+                inputValor.classList.add('opacity-50', 'bg-stone-100');
+            }
+        });
+
+        document.getElementById("mestre-bonus-tesouro").addEventListener('change', (e) => {
+            const inputValor = document.getElementById("mestre-bonus-tesouro-valor");
+            if(e.target.checked) {
+                inputValor.disabled = false;
+                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+            } else {
+                inputValor.disabled = true;
+                inputValor.classList.add('opacity-50', 'bg-stone-100');
+            }
+        });
+
+        document.getElementById("mestre-bonus-xp-valor").disabled = true;
+        document.getElementById("mestre-bonus-xp-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("mestre-bonus-tesouro-valor").disabled = true;
+        document.getElementById("mestre-bonus-tesouro-valor").classList.add('opacity-50', 'bg-stone-100');
+
+        document.getElementById("btn-calcular-mestre").onclick = calcularMestre;
+
+        switchTab('nd');
+    </script>
+</body>
+</html>
