@@ -6,10 +6,10 @@
     <title>Ferramentas T20 - ND, Recompensas e Mestragem</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-stone-100 min-h-screen py-10 px-4 font-sans text-stone-800 transition-colors duration-200">
-    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden border border-stone-200">
+<body class="bg-stone-900 min-h-screen py-10 px-4 font-sans text-stone-100 transition-colors duration-200">
+    <div class="max-w-2xl mx-auto bg-stone-800 rounded-2xl shadow-2xl overflow-hidden border border-stone-700">
         
-        <div class="flex border-b border-stone-200 bg-stone-50">
+        <div class="flex border-b border-stone-700 bg-stone-800">
             <button id="tab-btn-nd" class="flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none">
                 ND
             </button>
@@ -34,16 +34,16 @@
                 <div id="inimigos-container" class="space-y-3"></div>
                 
                 <div class="flex flex-wrap gap-3 pt-2">
-                    <button id="btn-adicionar" class="flex-1 min-w-[180px] bg-stone-700 hover:bg-stone-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-stone-600">
+                    <button id="btn-adicionar" class="flex-1 min-w-[180px] bg-stone-600 hover:bg-stone-500 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-stone-500">
                         + Adicionar Inimigo
                     </button>
-                    <button id="btn-calcular" class="flex-1 min-w-[180px] bg-red-700 hover:bg-red-800 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-red-800">
+                    <button id="btn-calcular" class="flex-1 min-w-[180px] bg-red-700 hover:bg-red-600 text-white font-semibold py-2.5 px-4 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer text-center border border-red-600">
                         Calcular ND Final
                     </button>
                 </div>
                 
                 <div id="resultado-container" class="mt-6">
-                    <div class="text-center text-stone-400 py-8 border-2 border-dashed border-stone-200 rounded-xl text-sm">
+                    <div class="text-center text-stone-500 py-8 border-2 border-dashed border-stone-700 rounded-xl text-sm">
                         Preencha as quantidades e clique em "Calcular ND Final".
                     </div>
                 </div>
@@ -63,14 +63,14 @@
                 <div class="space-y-2">
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">ND da Missão</label>
-                            <select id="xp-nd-missao" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                            <label class="block text-xs font-bold text-stone-400 uppercase mb-1">ND da Missão</label>
+                            <select id="xp-nd-missao" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Dificuldade</label>
-                            <select id="xp-dificuldade" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                            <label class="block text-xs font-bold text-stone-400 uppercase mb-1">Dificuldade</label>
+                            <select id="xp-dificuldade" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <option value="0.4" selected>Normal (40%)</option>
                                 <option value="0.5">Difícil +1 (50%)</option>
                                 <option value="0.6">Valkaria +2 (60%)</option>
@@ -78,29 +78,29 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-stone-500 uppercase mb-1">Jogadores</label>
-                            <input type="number" id="xp-jogadores" value="4" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-emerald-500 bg-white">
+                            <label class="block text-xs font-bold text-stone-400 uppercase mb-1">Jogadores</label>
+                            <input type="number" id="xp-jogadores" value="4" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                         </div>
                     </div>
 
-                    <div class="space-y-3 pt-2 border-t border-stone-100 mt-2">
-                        <label class="inline-flex items-center gap-2 cursor-pointer text-stone-400 hover:text-red-700 transition-colors">
-                            <input type="checkbox" id="xp-falha-missao" class="w-4 h-4 accent-red-600 rounded">
+                    <div class="space-y-3 pt-2 border-t border-stone-700 mt-2">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-stone-400 hover:text-red-400 transition-colors">
+                            <input type="checkbox" id="xp-falha-missao" class="w-4 h-4 accent-red-500 rounded">
                             <span class="text-[11px] font-bold uppercase tracking-wider">Falha na Missão (Penalidade em XP)</span>
                         </label>
                         <div class="flex flex-wrap gap-x-6 gap-y-2">
-                            <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-600 hover:text-emerald-800 transition-colors">
-                                <input type="checkbox" id="xp-bonus-evento" class="w-4 h-4 accent-emerald-600 rounded">
+                            <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-400 hover:text-emerald-300 transition-colors">
+                                <input type="checkbox" id="xp-bonus-evento" class="w-4 h-4 accent-emerald-500 rounded">
                                 <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento XP (+</span>
                                 <input type="number" id="xp-bonus-evento-valor" value="25" min="0" max="999" step="5"
-                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-600 rounded bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                                 <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
                             </label>
-                            <label class="inline-flex items-center gap-2 cursor-pointer text-rose-700 hover:text-rose-900 transition-colors">
-                                <input type="checkbox" id="tesouro-bonus-evento" class="w-4 h-4 accent-rose-700 rounded">
+                            <label class="inline-flex items-center gap-2 cursor-pointer text-amber-400 hover:text-amber-300 transition-colors">
+                                <input type="checkbox" id="tesouro-bonus-evento" class="w-4 h-4 accent-amber-500 rounded">
                                 <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento T$ (+</span>
                                 <input type="number" id="tesouro-bonus-evento-valor" value="25" min="0" max="999" step="5"
-                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                                       class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-600 rounded bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-500">
                                 <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
                             </label>
                         </div>
@@ -109,16 +109,16 @@
 
                 <div>
                     <div class="flex items-center justify-between mb-3">
-                        <h3 class="text-sm font-bold text-stone-700 uppercase tracking-widest">Criaturas em Combate</h3>
-                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-emerald-200">Sincronizado via ND</span>
+                        <h3 class="text-sm font-bold text-stone-200 uppercase tracking-widest">Criaturas em Combate</h3>
+                        <span class="text-[10px] bg-emerald-950/60 text-emerald-300 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider border border-emerald-800">Sincronizado via ND</span>
                     </div>
                     <div id="xp-ameacas-container" class="space-y-3"></div>
-                    <button id="btn-add-ameaca" class="w-full mt-3 bg-stone-700 hover:bg-stone-800 text-white font-semibold py-2 px-4 rounded-xl transition-all shadow-sm cursor-pointer active:scale-95">
+                    <button id="btn-add-ameaca" class="w-full mt-3 bg-stone-600 hover:bg-stone-500 text-white font-semibold py-2 px-4 rounded-xl transition-all shadow-sm cursor-pointer active:scale-95">
                         + Adicionar Criatura
                     </button>
                 </div>
 
-                <button id="btn-calcular-xp" class="w-full bg-stone-800 hover:bg-black text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
+                <button id="btn-calcular-xp" class="w-full bg-emerald-700 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
                     Calcular Recompensas
                 </button>
                 
@@ -136,49 +136,52 @@
             </div>
             
             <div class="p-6 space-y-6">
-                <div class="space-y-2">
+                <div class="space-y-3">
                     <div>
-                        <label class="block text-xs font-bold text-stone-500 uppercase mb-1">ND do Personagem</label>
-                        <select id="mestre-nd" class="w-full px-3 py-2 border rounded-lg border-stone-300 focus:ring-2 focus:ring-indigo-500 bg-white">
+                        <label class="block text-xs font-bold text-stone-400 uppercase mb-1">ND do Personagem</label>
+                        <select id="mestre-nd" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                             <option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
                         </select>
                     </div>
 
-                    <div class="flex flex-wrap gap-x-6 gap-y-2 pt-2 border-t border-stone-100 mt-2">
-                        <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-600 hover:text-emerald-800 transition-colors">
-                            <input type="checkbox" id="mestre-bonus-xp" class="w-4 h-4 accent-emerald-600 rounded">
+                    <div class="pt-2 border-t border-stone-700">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-indigo-400 hover:text-indigo-300 transition-colors">
+                            <input type="checkbox" id="mestre-missao-interpretativa" class="w-4 h-4 accent-indigo-500 rounded">
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Missão Interpretativa (XP ×333,33 / T$ ÷3)</span>
+                        </label>
+                    </div>
+
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 pt-2 border-t border-stone-700">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-emerald-400 hover:text-emerald-300 transition-colors">
+                            <input type="checkbox" id="mestre-bonus-xp" class="w-4 h-4 accent-emerald-500 rounded">
                             <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento XP (+</span>
                             <input type="number" id="mestre-bonus-xp-valor" value="25" min="0" max="999" step="5"
-                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-600 rounded bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                             <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
                         </label>
-                        <label class="inline-flex items-center gap-2 cursor-pointer text-rose-700 hover:text-rose-900 transition-colors">
-                            <input type="checkbox" id="mestre-bonus-tesouro" class="w-4 h-4 accent-rose-700 rounded">
+                        <label class="inline-flex items-center gap-2 cursor-pointer text-amber-400 hover:text-amber-300 transition-colors">
+                            <input type="checkbox" id="mestre-bonus-tesouro" class="w-4 h-4 accent-amber-500 rounded">
                             <span class="text-[11px] font-bold uppercase tracking-wider">Bônus Evento T$ (+</span>
                             <input type="number" id="mestre-bonus-tesouro-valor" value="25" min="0" max="999" step="5"
-                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-300 rounded bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-rose-500">
+                                   class="w-14 px-1.5 py-0.5 text-[11px] font-bold text-center border border-stone-600 rounded bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-500">
                             <span class="text-[11px] font-bold uppercase tracking-wider">%)</span>
-                        </label>
-                        <label class="inline-flex items-center gap-2 cursor-pointer text-indigo-600 hover:text-indigo-800 transition-colors">
-                            <input type="checkbox" id="mestre-missao-interpretativa" class="w-4 h-4 accent-indigo-600 rounded">
-                            <span class="text-[11px] font-bold uppercase tracking-wider">Missão Interpretativa (XP ×333,33 / T$ ÷3)</span>
                         </label>
                     </div>
                 </div>
 
-                <button id="btn-calcular-mestre" class="w-full bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
+                <button id="btn-calcular-mestre" class="w-full bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all active:scale-95 cursor-pointer">
                     Calcular Recompensas do Mestre
                 </button>
                 
                 <div id="mestre-resultado-container">
-                    <div class="text-center text-stone-400 py-8 border-2 border-dashed border-stone-200 rounded-xl text-sm">
+                    <div class="text-center text-stone-500 py-8 border-2 border-dashed border-stone-700 rounded-xl text-sm">
                         Escolha o ND e clique em "Calcular Recompensas do Mestre".
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="bg-stone-50 p-4 border-t border-stone-100 text-center text-xs text-stone-400">
+        <div class="bg-stone-900 p-4 border-t border-stone-700 text-center text-xs text-stone-500">
             Ferramentas para o sistema de RPG Tormenta 20 - Jogo do Ano.
         </div>
     </div>
@@ -195,29 +198,26 @@
             const btnXp = document.getElementById('tab-btn-xp');
             const btnMestre = document.getElementById('tab-btn-mestre');
 
-            // Esconde todas
             tabNd.classList.add('hidden');
             tabXp.classList.add('hidden');
             tabMestre.classList.add('hidden');
 
-            // Classes padrão (inativo)
-            const clsInativo = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-transparent text-stone-500 hover:bg-stone-100 hover:text-stone-700";
+            const clsInativo = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-transparent text-stone-500 hover:bg-stone-700 hover:text-stone-300";
 
-            // Reset dos botões
             btnNd.className = clsInativo;
             btnXp.className = clsInativo;
             btnMestre.className = clsInativo;
 
             if (tab === 'nd') {
                 tabNd.classList.remove('hidden');
-                btnNd.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-red-600 text-red-700 bg-red-50";
+                btnNd.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-red-500 text-red-400 bg-red-950/40";
             } else if (tab === 'xp') {
                 tabXp.classList.remove('hidden');
-                btnXp.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-emerald-600 text-emerald-700 bg-emerald-50";
+                btnXp.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-emerald-500 text-emerald-400 bg-emerald-950/40";
                 sincronizarNDparaXP();
             } else {
                 tabMestre.classList.remove('hidden');
-                btnMestre.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-indigo-600 text-indigo-700 bg-indigo-50";
+                btnMestre.className = "flex-1 py-4 text-xs sm:text-sm font-bold tracking-wide uppercase transition-colors duration-200 border-b-2 focus:outline-none border-indigo-500 text-indigo-400 bg-indigo-950/40";
             }
         }
 
@@ -263,20 +263,20 @@
             const container = document.getElementById("inimigos-container");
             const div = document.createElement("div");
             div.id = `linha-nd-${grandpaIdND}`;
-            div.className = "flex gap-3 items-end bg-stone-50 p-4 rounded-xl border border-stone-200 relative transition-colors";
+            div.className = "flex gap-3 items-end bg-stone-700/50 p-4 rounded-xl border border-stone-600 relative transition-colors";
             
             div.innerHTML = `
                 <div class="w-1/3">
-                    <label class="block text-xs font-bold text-stone-500 uppercase mb-1 tracking-wide">Quantidade</label>
-                    <input type="number" id="qtd-${grandpaIdND}" value="1" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-300 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-red-600 font-medium">
+                    <label class="block text-xs font-bold text-stone-400 uppercase mb-1 tracking-wide">Quantidade</label>
+                    <input type="number" id="qtd-${grandpaIdND}" value="1" min="1" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-red-500 font-medium">
                 </div>
                 <div class="w-2/3 pr-10">
-                    <label class="block text-xs font-bold text-stone-500 uppercase mb-1 tracking-wide">ND</label>
-                    <select id="nd-${grandpaIdND}" class="w-full px-3 py-2 border rounded-lg border-stone-300 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-red-600 font-medium">
+                    <label class="block text-xs font-bold text-stone-400 uppercase mb-1 tracking-wide">ND</label>
+                    <select id="nd-${grandpaIdND}" class="w-full px-3 py-2 border rounded-lg border-stone-600 bg-stone-700 text-stone-100 focus:outline-none focus:ring-2 focus:ring-red-500 font-medium">
                         <option value="0.25">1/4</option><option value="0.5">1/2</option><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
                     </select>
                 </div>
-                <button type="button" onclick="document.getElementById('linha-nd-${grandpaIdND}').remove()" class="absolute right-3 bottom-3 text-stone-400 hover:text-red-600 transition-colors p-1 font-bold text-lg cursor-pointer" title="Remover">
+                <button type="button" onclick="document.getElementById('linha-nd-${grandpaIdND}').remove()" class="absolute right-3 bottom-3 text-stone-500 hover:text-red-400 transition-colors p-1 font-bold text-lg cursor-pointer" title="Remover">
                     &times;
                 </button>
             `;
@@ -304,7 +304,7 @@
             }
             if (Object.keys(pool).length === 0) {
                 document.getElementById("resultado-container").innerHTML = `
-                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-center font-medium text-sm">
+                    <div class="bg-red-950/60 border border-red-800 text-red-300 px-4 py-3 rounded-xl text-center font-medium text-sm">
                         Adicione ao menos uma ameaça com quantidade válida para computar.
                     </div>
                 `;
@@ -330,10 +330,10 @@
                 if (nd1ToAdd > 0) pool[1] = (pool[1] || 0) + nd1ToAdd;
                 if (remainder > 0) pool[remainder] = (pool[remainder] || 0) + 1;
                 
-                logFracoes = `<div class="mt-3 pt-3 border-t border-stone-200 text-stone-700 text-xs space-y-1">`;
+                logFracoes = `<div class="mt-3 pt-3 border-t border-stone-600 text-stone-300 text-xs space-y-1">`;
                 logFracoes += `<div><strong>Regra de Frações (Ameaças de Arton, p.9):</strong><br>Somando frações (${fracoesOriginais.join(" + ")}) = ${fracSum.toFixed(2)} ND Base.</div>`;
-                if (nd1ToAdd > 0) logFracoes += `<div class="text-red-700">&rarr; Convertido para <strong>${nd1ToAdd}x ND 1</strong></div>`;
-                if (remainder > 0) logFracoes += `<div class="text-stone-500">&rarr; Restou <strong>1x ND ${formatNd(remainder)}</strong></div>`;
+                if (nd1ToAdd > 0) logFracoes += `<div class="text-red-400">&rarr; Convertido para <strong>${nd1ToAdd}x ND 1</strong></div>`;
+                if (remainder > 0) logFracoes += `<div class="text-stone-400">&rarr; Restou <strong>1x ND ${formatNd(remainder)}</strong></div>`;
                 logFracoes += `</div>`;
             }
                 
@@ -341,29 +341,29 @@
             
             let htmlPasso0 = `
                 <div class="space-y-2">
-                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">0</span>
+                    <h4 class="text-sm font-bold text-stone-200 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-950/60 text-red-400 flex items-center justify-center text-xs font-bold">0</span>
                         Entrada ajustada para o cálculo:
                     </h4>
-                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+                    <div class="bg-stone-700/40 p-3 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-1.5 pl-8">
             `;
             chaves.forEach(nd => { htmlPasso0 += `<div>&bull; ${pool[nd]}x ND ${formatNd(nd)}</div>`; });
             htmlPasso0 += logFracoes + "</div></div>";
             
             let htmlPasso1 = `
-                <div class="space-y-2 pt-2 border-t border-stone-100">
-                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">1</span>
+                <div class="space-y-2 pt-2 border-t border-stone-700">
+                    <h4 class="text-sm font-bold text-stone-200 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-950/60 text-red-400 flex items-center justify-center text-xs font-bold">1</span>
                         Agrupamento inicial em potências de 2 (por criatura):
                     </h4>
-                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+                    <div class="bg-stone-700/40 p-3 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-1.5 pl-8">
             `;
             
             let gruposConsolidados = [];
             chaves.forEach(ndAtual => {
                 const qtd = pool[ndAtual];
                 const grupos = decomporEmPotenciasDeDois(qtd);
-                htmlPasso1 += `<div class='text-red-600 font-bold'>&bull; ND ${formatNd(ndAtual)} com quantidade ${qtd}:</div>`;
+                htmlPasso1 += `<div class='text-red-400 font-bold'>&bull; ND ${formatNd(ndAtual)} com quantidade ${qtd}:</div>`;
                 grupos.forEach(grupo => {
                     if (grupo > 1) {
                         const potenciaLog2 = Math.floor(Math.log2(grupo));
@@ -381,7 +381,7 @@
             
             gruposConsolidados.sort((a, b) => b - a);
             const gruposIniciaisFormatados = gruposConsolidados.map(n => formatNd(n)).join(', ');
-            htmlPasso1 += `<div class='pt-2 mt-2 border-t border-stone-200 text-stone-800'><strong>Grupos resultantes desta etapa:</strong> [${gruposIniciaisFormatados}]</div>`;
+            htmlPasso1 += `<div class='pt-2 mt-2 border-t border-stone-600 text-stone-100'><strong>Grupos resultantes desta etapa:</strong> [${gruposIniciaisFormatados}]</div>`;
             htmlPasso1 += "</div></div>";
             
             let htmlPasso1B = "";
@@ -400,12 +400,12 @@
                 
                 if (rodadaConsolidacao === 1) {
                     htmlPasso1B += `
-                        <div class="space-y-2 pt-2 border-t border-stone-100">
-                            <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
-                                <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">1B</span>
+                        <div class="space-y-2 pt-2 border-t border-stone-700">
+                            <h4 class="text-sm font-bold text-stone-200 flex items-center gap-1.5">
+                                <span class="w-5 h-5 rounded-full bg-red-950/60 text-red-400 flex items-center justify-center text-xs font-bold">1B</span>
                                 Re-agrupamento de NDs Resultantes Idênticos:
                             </h4>
-                            <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-1.5 pl-8">
+                            <div class="bg-stone-700/40 p-3 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-1.5 pl-8">
                     `;
                 }
                 
@@ -423,7 +423,7 @@
                                 let bonusDobra = 2 * potenciaLog2;
                                 let novoNd = floorQuarter(nd + bonusDobra);
                                 proximosGrupos.push(novoNd);
-                                htmlPasso1B += `<div class='pl-4 text-rose-700 font-semibold'>&rarr; Novo grupo de ${grupo} = ND ${formatNd(nd)} + ${bonusDobra} &rarr; <strong>ND ${formatNd(novoNd)}</strong></div>`;
+                                htmlPasso1B += `<div class='pl-4 text-rose-400 font-semibold'>&rarr; Novo grupo de ${grupo} = ND ${formatNd(nd)} + ${bonusDobra} &rarr; <strong>ND ${formatNd(novoNd)}</strong></div>`;
                             } else {
                                 let novoNd = floorQuarter(nd);
                                 proximosGrupos.push(novoNd);
@@ -440,7 +440,7 @@
             
             if (houveReagrupamento) {
                 const gruposFinaisPosReagrupamento = gruposConsolidados.map(n => formatNd(n)).join(', ');
-                htmlPasso1B += `<div class='pt-2 mt-2 border-t border-stone-200 text-stone-800'><strong>Grupos consolidados finais pós-fusão:</strong> [${gruposFinaisPosReagrupamento}]</div>`;
+                htmlPasso1B += `<div class='pt-2 mt-2 border-t border-stone-600 text-stone-100'><strong>Grupos consolidados finais pós-fusão:</strong> [${gruposFinaisPosReagrupamento}]</div>`;
                 htmlPasso1B += "</div></div>";
             }
 
@@ -448,14 +448,14 @@
             let totalNd = ndMax;
             
             let htmlPasso2 = `
-                <div class="space-y-2 pt-2 border-t border-stone-100">
-                    <h4 class="text-sm font-bold text-stone-700 flex items-center gap-1.5">
-                        <span class="w-5 h-5 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs font-bold">2</span>
+                <div class="space-y-2 pt-2 border-t border-stone-700">
+                    <h4 class="text-sm font-bold text-stone-200 flex items-center gap-1.5">
+                        <span class="w-5 h-5 rounded-full bg-red-950/60 text-red-400 flex items-center justify-center text-xs font-bold">2</span>
                         Mistura entre grupos diferentes:
                     </h4>
-                    <div class="bg-stone-50 p-3 rounded-xl border border-stone-100 text-sm text-stone-600 space-y-2 pl-8">
-                        <div>Ameaça Principal (Base): <strong class='text-red-700'>${formatNd(totalNd)}</strong></div>
-                        <div class="space-y-1 pt-1 border-t border-stone-200 text-xs">
+                    <div class="bg-stone-700/40 p-3 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-2 pl-8">
+                        <div>Ameaça Principal (Base): <strong class='text-red-400'>${formatNd(totalNd)}</strong></div>
+                        <div class="space-y-1 pt-1 border-t border-stone-600 text-xs">
             `;
             
             for (let i = 1; i < gruposConsolidados.length; i++) {
@@ -468,14 +468,14 @@
                 
                 if (bonus > 0) {
                     totalNd = floorQuarter(totalNd + bonus);
-                    htmlPasso2 += `<div class='text-stone-500'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; bônus +${formatNd(bonus)} &rarr; <strong>Acumulado: ${formatNd(totalNd)}</strong></div>`;
+                    htmlPasso2 += `<div class='text-stone-300'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; bônus +${formatNd(bonus)} &rarr; <strong>Acumulado: ${formatNd(totalNd)}</strong></div>`;
                 } else {
-                    htmlPasso2 += `<div class='text-stone-400'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; Afastado demais (+0)</div>`;
+                    htmlPasso2 += `<div class='text-stone-500'>&bull; Somando ND ${formatNd(ndOutro)} (Dif. ${formatNd(diff)}) &rarr; Afastado demais (+0)</div>`;
                 }
             }
                 
             if (gruposConsolidados.length === 1) {
-                htmlPasso2 += "<div class='text-stone-400 italic'>O encontro possui apenas uma faixa consolidada de ND.</div>";
+                htmlPasso2 += "<div class='text-stone-500 italic'>O encontro possui apenas uma faixa consolidada de ND.</div>";
             }
                 
             htmlPasso2 += "</div></div></div>";
@@ -484,10 +484,10 @@
             if (ndFinal < 0) ndFinal = 0;
             
             const htmlResultado = `
-                <div class="bg-gradient-to-b from-red-50/60 to-white p-5 rounded-2xl border border-red-100 shadow-sm space-y-4">
-                    <div class="text-center bg-red-700/10 p-5 rounded-xl border border-red-200/60">
-                        <span class="block text-xs font-bold text-red-700 uppercase tracking-widest mb-1">ND Final do Encontro</span>
-                        <span class="text-5xl font-black text-red-950">${formatNd(ndFinal)}</span>
+                <div class="bg-gradient-to-b from-red-950/40 to-stone-800 p-5 rounded-2xl border border-red-900/60 shadow-sm space-y-4">
+                    <div class="text-center bg-red-900/30 p-5 rounded-xl border border-red-800/60">
+                        <span class="block text-xs font-bold text-red-400 uppercase tracking-widest mb-1">ND Final do Encontro</span>
+                        <span class="text-5xl font-black text-red-100">${formatNd(ndFinal)}</span>
                     </div>
                     ${htmlPasso0}
                     ${htmlPasso1}
@@ -540,7 +540,7 @@
             const container = document.getElementById("xp-ameacas-container");
             const div = document.createElement("div");
             div.id = `ameaca-xp-${grandpaIdXP}`;
-            div.className = "flex gap-2 bg-stone-50 p-3 rounded-xl border border-stone-200 items-center transition-all";
+            div.className = "flex gap-2 bg-stone-700/40 p-3 rounded-xl border border-stone-600 items-center transition-all";
             
             const optionsHtml = [0.25, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                 .map(n => `<option value="${n}" ${parseFloat(n) === parseFloat(ndPadrao) ? 'selected' : ''}>ND ${formatarNDXP(n)}</option>`)
@@ -548,22 +548,22 @@
 
             div.innerHTML = `
                 <div class="w-14">
-                    <input type="number" id="xp-q-${grandpaIdXP}" value="${qtdPadrao}" min="1" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-center" placeholder="Qtd" title="Quantidade">
+                    <input type="number" id="xp-q-${grandpaIdXP}" value="${qtdPadrao}" min="1" class="w-full px-2 py-2 border border-stone-600 rounded-lg bg-stone-700 text-stone-100 text-sm focus:ring-2 focus:ring-emerald-500 outline-none text-center" placeholder="Qtd" title="Quantidade">
                 </div>
                 <div class="flex-1">
-                    <select id="xp-n-${grandpaIdXP}" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-emerald-500 outline-none" title="ND da Criatura">
+                    <select id="xp-n-${grandpaIdXP}" class="w-full px-2 py-2 border border-stone-600 rounded-lg bg-stone-700 text-stone-100 text-sm focus:ring-2 focus:ring-emerald-500 outline-none" title="ND da Criatura">
                         ${optionsHtml}
                     </select>
                 </div>
                 <div class="flex-1">
-                    <select id="xp-t-${grandpaIdXP}" class="w-full px-2 py-2 border rounded-lg bg-white text-sm focus:ring-2 focus:ring-rose-500 outline-none" title="Tesouro da Criatura">
+                    <select id="xp-t-${grandpaIdXP}" class="w-full px-2 py-2 border border-stone-600 rounded-lg bg-stone-700 text-stone-100 text-sm focus:ring-2 focus:ring-amber-500 outline-none" title="Tesouro da Criatura">
                         <option value="0" ${parseFloat(tesouroPadrao) === 0 ? 'selected' : ''}>T$ Nenhum</option>
                         <option value="0.5" ${parseFloat(tesouroPadrao) === 0.5 ? 'selected' : ''}>T$ Metade</option>
                         <option value="1" ${parseFloat(tesouroPadrao) === 1 ? 'selected' : ''}>T$ Padrão</option>
                         <option value="2" ${parseFloat(tesouroPadrao) === 2 ? 'selected' : ''}>T$ Dobro</option>
                     </select>
                 </div>
-                <button type="button" onclick="document.getElementById('ameaca-xp-${grandpaIdXP}').remove()" class="text-red-500 font-bold hover:text-red-700 cursor-pointer px-1 text-lg" title="Remover">&times;</button>
+                <button type="button" onclick="document.getElementById('ameaca-xp-${grandpaIdXP}').remove()" class="text-red-400 font-bold hover:text-red-300 cursor-pointer px-1 text-lg" title="Remover">&times;</button>
             `;
             container.appendChild(div);
         }
@@ -651,7 +651,7 @@
                 if (qtd > 0 && multTesouro > 0) {
                     const nomesMult = { 0: 'Nenhum', 0.5: 'Metade', 1: 'Padrão', 2: 'Dobro' };
                     linhasTesouroCriaturas.push(
-                        `<div class='text-stone-500'>&bull; ${qtd}x ND ${formatarNDXP(ndCriatura)} (${nomesMult[multTesouro]}) &rarr; ${formatarT$(valorLinha)}</div>`
+                        `<div class='text-stone-400'>&bull; ${qtd}x ND ${formatarNDXP(ndCriatura)} (${nomesMult[multTesouro]}) &rarr; ${formatarT$(valorLinha)}</div>`
                     );
                 }
             });
@@ -679,76 +679,76 @@
                     
                     <!-- ==================== XP ==================== -->
                     <div class="space-y-4">
-                        <h3 class="text-xs font-bold text-emerald-700 uppercase tracking-widest border-b border-emerald-200 pb-1">Experiência (XP)</h3>
+                        <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-800/60 pb-1">Experiência (XP)</h3>
                         
-                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm text-stone-600 space-y-2">
-                            <div class="flex justify-between ${bFalha ? 'text-red-700' : ''}">
+                        <div class="bg-stone-700/40 p-4 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-2">
+                            <div class="flex justify-between ${bFalha ? 'text-red-400' : ''}">
                                 <span>${textoMissao}</span>
                                 <strong>${xpMissaoBase.toLocaleString('pt-BR')} XP</strong>
                             </div>
-                            <div class="flex justify-between ${bFalha ? 'text-red-700' : ''}">
+                            <div class="flex justify-between ${bFalha ? 'text-red-400' : ''}">
                                 <span>Criaturas (${porcentagemCriaturas}% de ${xpBrutoCriaturas.toLocaleString('pt-BR')}):</span>
                                 <strong>+ ${xpCriaturasModificado.toLocaleString('pt-BR')} XP</strong>
                             </div>
                             ${bBonus ? `
-                            <div class="flex justify-between text-emerald-600">
+                            <div class="flex justify-between text-emerald-400">
                                 <span>Bônus de Evento XP (+${percentualBonus}%):</span>
                                 <strong>+ ${valorBonus.toLocaleString('pt-BR')} XP</strong>
                             </div>` : ''}
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-1 bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-center flex flex-col justify-center">
-                                <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">XP Total Sessão</p>
-                                <p class="text-4xl font-black text-stone-800">${xpTotalSessao.toLocaleString('pt-BR')}</p>
+                            <div class="flex-1 bg-stone-700 p-6 rounded-2xl border border-stone-600 shadow-sm text-center flex flex-col justify-center">
+                                <p class="text-xs font-bold text-stone-400 uppercase tracking-widest mb-2">XP Total Sessão</p>
+                                <p class="text-4xl font-black text-stone-100">${xpTotalSessao.toLocaleString('pt-BR')}</p>
                             </div>
                             
-                            <div class="flex-1 bg-gradient-to-br from-${corTema}-50 to-white p-6 rounded-2xl border border-${corTema}-300 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
-                                <div class="absolute top-0 right-0 bg-${corTema}-700 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
+                            <div class="flex-1 bg-gradient-to-br from-${corTema}-900/60 to-stone-700 p-6 rounded-2xl border border-${corTema}-700 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-${corTema}-600 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
                                     Div / ${qtdJogadores}
                                 </div>
-                                <p class="text-xs font-bold text-${corTema}-800 uppercase tracking-widest mb-2">XP por Jogador</p>
-                                <p class="text-5xl font-black text-${corTema}-950">${xpPorJogador.toLocaleString('pt-BR')}</p>
+                                <p class="text-xs font-bold text-${corTema}-300 uppercase tracking-widest mb-2">XP por Jogador</p>
+                                <p class="text-5xl font-black text-${corTema}-100">${xpPorJogador.toLocaleString('pt-BR')}</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- ==================== TESOURO ==================== -->
                     <div class="space-y-4">
-                        <h3 class="text-xs font-bold text-rose-700 uppercase tracking-widest border-b border-rose-200 pb-1">Tesouro (T$)</h3>
+                        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-amber-800/60 pb-1">Tesouro (T$)</h3>
                         
-                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm text-stone-700 space-y-2">
+                        <div class="bg-amber-950/30 p-4 rounded-xl border border-amber-900/60 text-sm text-stone-200 space-y-2">
                             <div class="flex justify-between">
                                 <span>Tesouro Base da Missão (ND ${formatarNDXP(ndMissao)}):</span>
-                                <strong>${formatarT$(tesouroBaseMissao)}</strong>
+                                <strong class="text-amber-200">${formatarT$(tesouroBaseMissao)}</strong>
                             </div>
                             <div class="flex justify-between">
                                 <span>Criaturas (${linhasTesouroCriaturas.length} tipo${linhasTesouroCriaturas.length !== 1 ? 's' : ''}):</span>
-                                <strong>+ ${formatarT$(tesouroCriaturasTotal)}</strong>
+                                <strong class="text-amber-200">+ ${formatarT$(tesouroCriaturasTotal)}</strong>
                             </div>
                             ${linhasTesouroCriaturas.length > 0 ? `
-                            <div class="pl-3 pt-1 border-t border-rose-200 text-xs space-y-0.5">
+                            <div class="pl-3 pt-1 border-t border-amber-900/60 text-xs space-y-0.5">
                                 ${linhasTesouroCriaturas.join('')}
                             </div>` : ''}
                             ${bBonusTesouro ? `
-                            <div class="flex justify-between text-rose-700 pt-1 border-t border-rose-200">
+                            <div class="flex justify-between text-amber-300 pt-1 border-t border-amber-900/60">
                                 <span>Bônus de Evento T$ (+${percentualBonusTesouro}%):</span>
                                 <strong>+ ${formatarT$(tesouroBonusValor)}</strong>
                             </div>` : ''}
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <div class="flex-1 bg-white p-6 rounded-2xl border border-stone-200 shadow-sm text-center flex flex-col justify-center">
-                                <p class="text-xs font-bold text-stone-500 uppercase tracking-widest mb-2">Tesouro Total Sessão</p>
-                                <p class="text-4xl font-black text-stone-800">${formatarT$(tesouroFinal)}</p>
+                            <div class="flex-1 bg-stone-700 p-6 rounded-2xl border border-stone-600 shadow-sm text-center flex flex-col justify-center">
+                                <p class="text-xs font-bold text-stone-400 uppercase tracking-widest mb-2">Tesouro Total Sessão</p>
+                                <p class="text-4xl font-black text-amber-100">${formatarT$(tesouroFinal)}</p>
                             </div>
                             
-                            <div class="flex-1 bg-gradient-to-br from-rose-50 to-white p-6 rounded-2xl border border-rose-300 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
-                                <div class="absolute top-0 right-0 bg-rose-700 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
+                            <div class="flex-1 bg-gradient-to-br from-amber-900/60 to-stone-700 p-6 rounded-2xl border border-amber-700 shadow-md text-center flex flex-col justify-center relative overflow-hidden">
+                                <div class="absolute top-0 right-0 bg-amber-600 text-amber-50 text-[10px] font-bold px-2 py-1 rounded-bl-lg uppercase">
                                     Div / ${qtdJogadores}
                                 </div>
-                                <p class="text-xs font-bold text-rose-800 uppercase tracking-widest mb-2">Tesouro por Jogador</p>
-                                <p class="text-5xl font-black text-rose-950">${formatarT$(tesouroFinal / qtdJogadores)}</p>
+                                <p class="text-xs font-bold text-amber-300 uppercase tracking-widest mb-2">Tesouro por Jogador</p>
+                                <p class="text-5xl font-black text-amber-100">${formatarT$(tesouroFinal / qtdJogadores)}</p>
                             </div>
                         </div>
                     </div>
@@ -760,10 +760,10 @@
             const selectDif = document.getElementById("xp-dificuldade");
             if(e.target.checked) {
                 selectDif.disabled = true;
-                selectDif.classList.add('opacity-50', 'bg-stone-100');
+                selectDif.classList.add('opacity-50', 'bg-stone-800');
             } else {
                 selectDif.disabled = false;
-                selectDif.classList.remove('opacity-50', 'bg-stone-100');
+                selectDif.classList.remove('opacity-50', 'bg-stone-800');
             }
         });
 
@@ -771,10 +771,10 @@
             const inputValor = document.getElementById("xp-bonus-evento-valor");
             if(e.target.checked) {
                 inputValor.disabled = false;
-                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+                inputValor.classList.remove('opacity-50', 'bg-stone-800');
             } else {
                 inputValor.disabled = true;
-                inputValor.classList.add('opacity-50', 'bg-stone-100');
+                inputValor.classList.add('opacity-50', 'bg-stone-800');
             }
         });
 
@@ -782,17 +782,17 @@
             const inputValor = document.getElementById("tesouro-bonus-evento-valor");
             if(e.target.checked) {
                 inputValor.disabled = false;
-                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+                inputValor.classList.remove('opacity-50', 'bg-stone-800');
             } else {
                 inputValor.disabled = true;
-                inputValor.classList.add('opacity-50', 'bg-stone-100');
+                inputValor.classList.add('opacity-50', 'bg-stone-800');
             }
         });
 
         document.getElementById("xp-bonus-evento-valor").disabled = true;
-        document.getElementById("xp-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("xp-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-800');
         document.getElementById("tesouro-bonus-evento-valor").disabled = true;
-        document.getElementById("tesouro-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("tesouro-bonus-evento-valor").classList.add('opacity-50', 'bg-stone-800');
 
         document.getElementById("btn-add-ameaca").onclick = () => adicionarAmeacaXP();
         document.getElementById("btn-calcular-xp").onclick = calcularXP;
@@ -807,15 +807,19 @@
             const bBonusXP = document.getElementById("mestre-bonus-xp").checked;
             const bBonusT = document.getElementById("mestre-bonus-tesouro").checked;
             const bInterpretativa = document.getElementById("mestre-missao-interpretativa").checked;
-
-        
-            let xpBase, tesouroBase;
+            
+            // Valores base (mudam se interpretativa)
+            let xpBase, tesouroBase, rotuloXP, rotuloT;
             if (bInterpretativa) {
                 xpBase = nd * 333.33;
                 tesouroBase = getTesouroBaseND(nd) / 3;
+                rotuloXP = `XP Base Interpretativa (ND ${nd} × 333,33):`;
+                rotuloT = `Tesouro Base Interpretativa (ND ${nd} ÷ 3):`;
             } else {
                 xpBase = nd * 500;
                 tesouroBase = getTesouroBaseND(nd) * 0.5;
+                rotuloXP = `XP Base (ND ${nd} × 500):`;
+                rotuloT = `Tesouro Base (Metade de ND ${nd}):`;
             }
             
             // Bônus XP
@@ -826,7 +830,7 @@
                 if (percentualXP < 0) percentualXP = 0;
                 xpBonusValor = Math.ceil(xpBase * (percentualXP / 100));
             }
-            const xpFinal = xpBase + xpBonusValor;
+            const xpFinal = Math.ceil(xpBase) + xpBonusValor;
             
             // Bônus T$
             let tesouroBonusValor = 0;
@@ -836,52 +840,52 @@
                 if (percentualT < 0) percentualT = 0;
                 tesouroBonusValor = Math.ceil(tesouroBase * (percentualT / 100));
             }
-            const tesouroFinal = tesouroBase + tesouroBonusValor;
+            const tesouroFinal = Math.ceil(tesouroBase) + tesouroBonusValor;
             
             document.getElementById("mestre-resultado-container").innerHTML = `
                 <div class="space-y-6">
                     
                     <!-- ==================== XP ==================== -->
                     <div class="space-y-4">
-                        <h3 class="text-xs font-bold text-emerald-700 uppercase tracking-widest border-b border-emerald-200 pb-1">Experiência (XP)</h3>
+                        <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-widest border-b border-emerald-800/60 pb-1">Experiência (XP)</h3>
                         
-                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 text-sm text-stone-600 space-y-2">
+                        <div class="bg-stone-700/40 p-4 rounded-xl border border-stone-600 text-sm text-stone-300 space-y-2">
                             <div class="flex justify-between">
-                                <span>XP Base (ND ${nd} × 500):</span>
-                                <strong>${xpBase.toLocaleString('pt-BR')} XP</strong>
+                                <span>${rotuloXP}</span>
+                                <strong>${Math.ceil(xpBase).toLocaleString('pt-BR')} XP</strong>
                             </div>
                             ${bBonusXP ? `
-                            <div class="flex justify-between text-emerald-600">
+                            <div class="flex justify-between text-emerald-400">
                                 <span>Bônus de Evento XP (+${percentualXP}%):</span>
                                 <strong>+ ${xpBonusValor.toLocaleString('pt-BR')} XP</strong>
                             </div>` : ''}
                         </div>
 
-                        <div class="bg-gradient-to-br from-emerald-50 to-white p-6 rounded-2xl border border-emerald-300 shadow-md text-center">
-                            <p class="text-xs font-bold text-emerald-800 uppercase tracking-widest mb-2">XP Total</p>
-                            <p class="text-5xl font-black text-emerald-950">${xpFinal.toLocaleString('pt-BR')}</p>
+                        <div class="bg-gradient-to-br from-emerald-900/60 to-stone-700 p-6 rounded-2xl border border-emerald-700 shadow-md text-center">
+                            <p class="text-xs font-bold text-emerald-300 uppercase tracking-widest mb-2">XP Total</p>
+                            <p class="text-5xl font-black text-emerald-100">${xpFinal.toLocaleString('pt-BR')}</p>
                         </div>
                     </div>
 
                     <!-- ==================== TESOURO ==================== -->
                     <div class="space-y-4">
-                        <h3 class="text-xs font-bold text-rose-700 uppercase tracking-widest border-b border-rose-200 pb-1">Tesouro (T$)</h3>
+                        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-widest border-b border-amber-800/60 pb-1">Tesouro (T$)</h3>
                         
-                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200 text-sm text-stone-700 space-y-2">
+                        <div class="bg-amber-950/30 p-4 rounded-xl border border-amber-900/60 text-sm text-stone-200 space-y-2">
                             <div class="flex justify-between">
-                                <span>Tesouro Base (Metade de ND ${nd}):</span>
-                                <strong>${formatarT$(tesouroBase)}</strong>
+                                <span>${rotuloT}</span>
+                                <strong class="text-amber-200">${formatarT$(tesouroBase)}</strong>
                             </div>
                             ${bBonusT ? `
-                            <div class="flex justify-between text-rose-700">
+                            <div class="flex justify-between text-amber-300">
                                 <span>Bônus de Evento T$ (+${percentualT}%):</span>
                                 <strong>+ ${formatarT$(tesouroBonusValor)}</strong>
                             </div>` : ''}
                         </div>
 
-                        <div class="bg-gradient-to-br from-rose-50 to-white p-6 rounded-2xl border border-rose-300 shadow-md text-center">
-                            <p class="text-xs font-bold text-rose-800 uppercase tracking-widest mb-2">Tesouro Total</p>
-                            <p class="text-5xl font-black text-rose-950">${formatarT$(tesouroFinal)}</p>
+                        <div class="bg-gradient-to-br from-amber-900/60 to-stone-700 p-6 rounded-2xl border border-amber-700 shadow-md text-center">
+                            <p class="text-xs font-bold text-amber-300 uppercase tracking-widest mb-2">Tesouro Total</p>
+                            <p class="text-5xl font-black text-amber-100">${formatarT$(tesouroFinal)}</p>
                         </div>
                     </div>
                 </div>
@@ -892,10 +896,10 @@
             const inputValor = document.getElementById("mestre-bonus-xp-valor");
             if(e.target.checked) {
                 inputValor.disabled = false;
-                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+                inputValor.classList.remove('opacity-50', 'bg-stone-800');
             } else {
                 inputValor.disabled = true;
-                inputValor.classList.add('opacity-50', 'bg-stone-100');
+                inputValor.classList.add('opacity-50', 'bg-stone-800');
             }
         });
 
@@ -903,17 +907,17 @@
             const inputValor = document.getElementById("mestre-bonus-tesouro-valor");
             if(e.target.checked) {
                 inputValor.disabled = false;
-                inputValor.classList.remove('opacity-50', 'bg-stone-100');
+                inputValor.classList.remove('opacity-50', 'bg-stone-800');
             } else {
                 inputValor.disabled = true;
-                inputValor.classList.add('opacity-50', 'bg-stone-100');
+                inputValor.classList.add('opacity-50', 'bg-stone-800');
             }
         });
 
         document.getElementById("mestre-bonus-xp-valor").disabled = true;
-        document.getElementById("mestre-bonus-xp-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("mestre-bonus-xp-valor").classList.add('opacity-50', 'bg-stone-800');
         document.getElementById("mestre-bonus-tesouro-valor").disabled = true;
-        document.getElementById("mestre-bonus-tesouro-valor").classList.add('opacity-50', 'bg-stone-100');
+        document.getElementById("mestre-bonus-tesouro-valor").classList.add('opacity-50', 'bg-stone-800');
 
         document.getElementById("btn-calcular-mestre").onclick = calcularMestre;
 
